@@ -19,7 +19,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping("/payment/create")
-    public CommonResult create(Payment payment){
+    public CommonResult create(@RequestBody Payment payment){
         int result = paymentService.create(payment);
         log.info("*******插入结果："+result);
 
@@ -30,7 +30,7 @@ public class PaymentController {
     @GetMapping("/payment/get/{id}")
     public CommonResult getPaymentById(@PathVariable("id") Long id){
         Payment paymentById = paymentService.getPaymentById(id);
-        log.info("*******查询结果："+paymentById);
+        log.info("*******查询结果是："+paymentById);
 
         if (paymentById!=null)  return new CommonResult(200,"查询结果成功",paymentById);
         else return new CommonResult(444,"查询结果失败");
